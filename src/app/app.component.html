@@ -1,67 +1,42 @@
 <div class="container">
 
   <div class="container__image">
-    <img class="container__image__img" src="../assets/storm-4k.jpg" alt="...">
+    <img id="container_image" class="container__image__img" src={{url_weather_image}} alt="...">
   </div>
-
   <div class="container__main">
     <div class="container__main__weather">
-      <input class="container__main__weather__search" placeholder="Kyiv,Ukraine" type="text">
+      <div class="container__main__weather__search">
+        <input [(ngModel)]="city" id="place_input" class="container__main__weather__search__search-input" placeholder="Kyiv,Ukraine" type="text">
+        <button (click)="search_click()" class="container__main__weather__search__search-btn"></button>
+      </div>
       <div class="container__main__weather__weather-overview">
         <div class="container__main__weather__weather-overview__charts">
-          <div class="container__main__weather__weather-overview__charts__current-weather">
-            <h2 container__main__weather__weather-overview__charts__current-weather__place>New York, US</h2>
-            <h1 class="container__main__weather__weather-overview__charts__current-weather__digit-celcies">84 °</h1>
-            <h2 class="container__main__weather__weather-overview__charts__current-weather__digit-feels">Feels 24 °</h2>
-            <h1 container__main__weather__weather-overview__charts__current-weather__weather-type>Party cloudy</h1>
+          <div class="container__main__weather__weather-overview__charts__mobile">
+            <div class="container__main__weather__weather-overview__charts__current-weather">
+              <h2 id="place" container__main__weather__weather-overview__charts__current-weather__place>{{place_weather}}</h2>
+              <h1 id="temperature" class="container__main__weather__weather-overview__charts__current-weather__digit-celcies">{{temperature}}°</h1>
+              <h2 id="temperature_feels" class="container__main__weather__weather-overview__charts__current-weather__digit-feels">Feels {{temperature_feels}}°</h2>
+              <h1 id="type_weather" container__main__weather__weather-overview__charts__current-weather__weather-type>{{type_weather}}</h1>
+            </div>
+            <img class="container__main__weather__weather-overview__charts__mobile-icon" src={{weather_three_days_data[0].imageUrl}}/>
           </div>
-          <div class="container__main__weather__weather-overview__charts__chart">
-            <app-chart></app-chart>
+          <div id="chart" class="container__main__weather__weather-overview__charts__chart">
           </div>
         </div>
+
         <div class="container__main__weather__weather-overview__next-weather">
-          <div class="container__main__weather__weather-overview__next-weather__weather">
-            <h3>Mon 12</h3>
-            <img style="width: 150px; height: 150px; margin-left: 25px;" src="../assets/free-icon-cloudy-1163661.png"/>
-            <div class="container__main__weather__weather-overview__next-weather__weather__other" >
+          <div *ngFor="let item of weather_three_days_data" class="container__main__weather__weather-overview__next-weather__weather">
+            <h3>Date: {{item.dt_txt.substring(5, 10)}}</h3>
+            <img style="width: 150px; height: 150px; margin-left: 25px;" [src]="item.imageUrl" />
+            <div class="container__main__weather__weather-overview__next-weather__weather__other">
               <div>
-                <h2>84 °</h2>
-                <h2>Cloudy</h2>
+                <h2>{{ (item.main.temp - kelvin_temperature) | number:'1.0-0' }}°</h2>
+                <h2>{{ item.weather[0].main }}</h2>
               </div>
               <div>
-                <h4>Feels 90°F / 31°F</h4>
-                <h4>Humidity: 0.74%</h4>
-                <h4>Wind 15.5 M/s</h4>
-              </div>
-            </div>
-          </div>
-          <div class="container__main__weather__weather-overview__next-weather__weather">
-            <h3>Mon 12</h3>
-            <img style="width: 150px; height: 150px; margin-left: 25px;" src="../assets/free-icon-cloudy-1163661.png"/>
-            <div class="container__main__weather__weather-overview__next-weather__weather__other" >
-              <div>
-                <h2>84 °</h2>
-                <h2>Cloudy</h2>
-              </div>
-              <div>
-                <h4>Feels 90°F / 31°F</h4>
-                <h4>Humidity: 0.74%</h4>
-                <h4>Wind 15.5 M/s</h4>
-              </div>
-            </div>
-          </div>
-          <div class="container__main__weather__weather-overview__next-weather__weather">
-            <h3>Mon 12</h3>
-            <img style="width: 150px; height: 150px; margin-left: 25px;" src="../assets/free-icon-cloudy-1163661.png"/>
-            <div class="container__main__weather__weather-overview__next-weather__weather__other" >
-              <div>
-                <h2>84 °</h2>
-                <h2>Cloudy</h2>
-              </div>
-              <div>
-                <h4>Feels 90°F / 31°F</h4>
-                <h4>Humidity: 0.74%</h4>
-                <h4>Wind 15.5 M/s</h4>
+                <h4>Feels {{ (item.main.feels_like - kelvin_temperature) | number:'1.0-0' }} °C</h4>
+                <h4>Humidity: {{ item.main.humidity }}%</h4>
+                <h4>Wind {{ item.wind.speed }}M/s</h4>
               </div>
             </div>
           </div>
@@ -72,71 +47,18 @@
 
     <div class="container__main__news">
       <h1 class="container__main__news__title">Weather news</h1>
-      <div class="container__main__news__news-block">
+
+      <div class="container__main__news__news-block" *ngFor="let news of newsList">
         <div class="container__main__news__news-block__description">
-          <h4 class="container__main__news__news-block__description__text">Lorem ipsum dolor sit amet Ad assumenda, beatae cvenptatem voluptatum?</h4>
+          <h4 class="container__main__news__news-block__description__text">{{news.description}}</h4>
           <div class="container__main__news__news-block__description__block">
-            <h4 class="container__main__news__news-block__description__block__text">Kyiv Ukraine</h4>
-            <img class="container__main__news__news-block__description__block__img"  src="../assets/radar.png" alt="...">
+            <h4 class="container__main__news__news-block__description__block__text">{{news.location}}</h4>
+            <img class="container__main__news__news-block__description__block__img"  src="../../assets/radar.png" alt="...">
           </div>
         </div>
-        <img class="container__main__news__news-block__image" src="../assets/storm.jpg" alt="...">
+        <img class="container__main__news__news-block__image" src={{news.image_url}} alt="...">
       </div>
 
-      <div class="container__main__news__news-block">
-        <div class="container__main__news__news-block__description">
-          <h4 class="container__main__news__news-block__description__text">Lorem ipsum dolor sit amet Ad assumenda, beatae cvenptatem voluptatum?</h4>
-          <div class="container__main__news__news-block__description__block">
-            <h4 class="container__main__news__news-block__description__block__text">Kyiv Ukraine</h4>
-            <img class="container__main__news__news-block__description__block__img"  src="../assets/radar.png" alt="...">
-          </div>
-        </div>
-        <img class="container__main__news__news-block__image" src="../assets/storm.jpg" alt="...">
-      </div>
-
-      <div class="container__main__news__news-block">
-        <div class="container__main__news__news-block__description">
-          <h4 class="container__main__news__news-block__description__text">Lorem ipsum dolor sit amet Ad assumenda, beatae cvenptatem voluptatum?</h4>
-          <div class="container__main__news__news-block__description__block">
-            <h4 class="container__main__news__news-block__description__block__text">Kyiv Ukraine</h4>
-            <img class="container__main__news__news-block__description__block__img"  src="../assets/radar.png" alt="...">
-          </div>
-        </div>
-        <img class="container__main__news__news-block__image" src="../assets/storm.jpg" alt="...">
-      </div>
-
-      <div class="container__main__news__news-block">
-        <div class="container__main__news__news-block__description">
-          <h4 class="container__main__news__news-block__description__text">Lorem ipsum dolor sit amet Ad assumenda, beatae cvenptatem voluptatum?</h4>
-          <div class="container__main__news__news-block__description__block">
-            <h4 class="container__main__news__news-block__description__block__text">Kyiv Ukraine</h4>
-            <img class="container__main__news__news-block__description__block__img"  src="../assets/radar.png" alt="...">
-          </div>
-        </div>
-        <img class="container__main__news__news-block__image" src="../assets/storm.jpg" alt="...">
-      </div>
-
-      <div class="container__main__news__news-block">
-        <div class="container__main__news__news-block__description">
-          <h4 class="container__main__news__news-block__description__text">Lorem ipsum dolor sit amet Ad assumenda, beatae cvenptatem voluptatum?</h4>
-          <div class="container__main__news__news-block__description__block">
-            <h4 class="container__main__news__news-block__description__block__text">Kyiv Ukraine</h4>
-            <img class="container__main__news__news-block__description__block__img"  src="../assets/radar.png" alt="...">
-          </div>
-        </div>
-        <img class="container__main__news__news-block__image" src="../assets/storm.jpg" alt="...">
-      </div>
-
-      <div class="container__main__news__news-block">
-        <div class="container__main__news__news-block__description">
-          <h4 class="container__main__news__news-block__description__text">Lorem ipsum dolor sit amet Ad assumenda, beatae cvenptatem voluptatum?</h4>
-          <div class="container__main__news__news-block__description__block">
-            <h4 class="container__main__news__news-block__description__block__text">Kyiv Ukraine</h4>
-            <img class="container__main__news__news-block__description__block__img"  src="../assets/radar.png" alt="...">
-          </div>
-        </div>
-        <img class="container__main__news__news-block__image" src="../assets/storm.jpg" alt="...">
-      </div>
     </div>
   </div>
 </div>

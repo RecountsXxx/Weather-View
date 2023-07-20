@@ -3,104 +3,185 @@
   width: 100%;
   height: 100vh;
   display: flex;
-
-  @media(max-width: 768px){
+  overflow-y: hidden;
+  @media (max-width: 768px) {
     flex-direction: column;
+    overflow-y: visible;
   }
 
   &__image {
-    background: rgb(241,251,255);
-    flex:0.3;
+    background: rgb(241, 251, 255);
+    flex: 0.3;
 
     &__img {
       width: 150%;
       height: 100%;
-      image-rendering: high-quality;
+      image-rendering: pixelated;
       object-fit: cover;
-
     }
-    @media(max-width: 768px){
+
+    @media (max-width: 768px) {
       display: none;
     }
   }
 
   &__main {
     flex: 2;
-    background: rgb(241,251,255);
+    background: rgb(241, 251, 255);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 40px;
 
-    @media(max-width: 768px){
+    @media (max-width: 768px) {
       flex-direction: column;
     }
 
     &__weather {
       min-width: 900px;
       max-width: 1100px;
-      height: 90vh;
       background-color: white;
       margin-left: 25px;
       border-radius: 10px;
       display: flex;
       align-items: center;
+      margin: 10px;
       justify-content: center;
       flex-direction: column;
-      @media(max-width: 768px){
+
+      @media (max-width: 768px) {
         min-width: 270px;
         max-width: 300px;
         margin: 0px;
       }
-      &__search{
-        padding: 10px;
+
+      &__search {
+        padding: 5px;
+        margin-top: 25px;
         border-radius: 10px;
         border: whitesmoke 1px solid;
-        background: rgb(241,251,255);
+        background: rgb(241, 251, 255);
         width: 90%;
         font-size: 14px;
-        @media(max-width: 768px){
-          font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: 636px) {
+          margin-top: 5px;
+        }
+
+        &__search-input {
           padding: 10px;
+          border-radius: 10px;
+          border: none;
+          background: rgb(241, 251, 255);
+          width: 90%;
+          font-size: 14px;
+        }
+
+        &__search-btn {
+          background: url("https://img.icons8.com/fluency/96/search.png");
+          width: 35px;
+          height: 35px;
+          background-size: cover;
+          border: none;
+          transition: 0.3s ease-in-out;
+
+          &:hover {
+            scale: 115%;
+          }
         }
       }
 
-      &__weather-overview{
+      &__weather-overview {
         padding: 15px;
         border-radius: 15px;
-        height: 90%;
         width: 90%;
-        &__charts{
+
+        &__charts {
           display: flex;
           align-items: start;
           flex-direction: row;
-          gap:15px;
+          gap: 15px;
           margin-top: 0px;
 
-          &__chart{
-            margin-right: -50px;
+          @media (max-width: 756px) {
+            flex-direction: column;
           }
-          &__current-weather{
+
+          &__mobile {
             display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+          }
+
+          &__mobile-icon {
+            display: none;
+            width: 141px;
+            height: 141px;
+            margin-right: 25px;
+
+            @media (max-width: 756px) {
+              display: block;
+            }
+          }
+
+          &__chart {
+            margin-right: -50px;
+            margin-left: 30px;
+            width: 600px;
+            height: 300px;
+
+            @media (max-width: 756px) {
+              width: 280px;
+              height: 300px;
+              margin: 0;
+            }
+          }
+
+          &__current-weather {
+            display: flex;
+            width: 200px;
             align-items: start;
             justify-content: center;
             flex-direction: column;
-            &__digit-celcies{
+
+            @media (max-width: 768px) {
+              width: 150px;
+            }
+
+            &__digit-celcies {
               font-size: 62px;
             }
           }
         }
 
-        &__next-weather{
+        &__next-weather {
           display: flex;
           flex-direction: row;
+          align-items: center;
+          justify-content: center;
           gap: 50px;
-          &__weather{
-            background: rgb(241,251,255);
+          margin-bottom: 25px;
+
+          @media (max-width: 768px) {
+            flex-direction: column;
+            justify-content: start;
+            height: 100%;
+            margin: 0px;
+            gap: 5px;
+          }
+
+          &__weather {
+            background: rgb(241, 251, 255);
             border-radius: 15px;
-            padding: 10px;
-            &__other{
+            padding: 18px;
+            width: 210px;
+
+            &__other {
               display: flex;
               flex-direction: row;
               gap: 15px;
@@ -108,37 +189,42 @@
           }
         }
       }
-
     }
 
     &__news {
-      overflow-y: auto;
-      margin-right: 1vw;
+      overflow-y: hidden;
+      margin-right: 10px;
       min-width: 320px;
       max-width: 400px;
-      height: 90vh;
       background-color: white;
       border-radius: 10px;
-
-      @media(max-width: 768px){
+      gap: 10px;
+      @media (max-width: 768px) {
         min-width: 270px;
         max-width: 300px;
         margin: 0px;
         overflow-y: hidden;
         height: 100%;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
       }
 
-      &__title{
+      &__title {
         margin-top: 15px;
         margin-left: 15px;
         font-size: 24px;
 
-        @media(max-width: 768px){
+        @media (max-width: 768px) {
           font-size: 30px;
+          margin: 0px;
         }
       }
-      &__news-block{
-        background: rgb(241,251,255);
+
+      &__news-block {
+        background: rgb(241, 251, 255);
         border-radius: 15px;
         padding: 10px;
         margin-top: 10px;
@@ -146,45 +232,58 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        @media(max-width: 768px){
-          padding: 10px;
-          flex-direction: column-reverse;
+        border: 1px solid lightgray;
+        margin-right: 10px;
+
+        @media (max-width: 768px) {
+          flex-direction: column;
+          justify-content: center;
+          margin: 0px;
         }
 
-        &__image{
-          width: 120px;
+        &__image {
+          width: 130px;
           height: 120px;
           border-radius: 15px;
-          @media(max-width: 768px){
+          margin-left: 10px;
+          image-rendering: pixelated;
+
+          @media (max-width: 768px) {
             width: 220px;
             height: 200px;
             border-radius: 15px;
+            margin: 0;
+            margin-top: 5px;
           }
         }
 
-        &__description{
+        &__description {
           font-size: 14px;
-          @media(max-width: 768px){
+
+          @media (max-width: 768px) {
             font-size: 20px;
           }
-          &__block{
+
+          &__block {
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap:5px;
-            margin-left: 10px;
+            gap: 5px;
+            color: gray;
             margin-top: 10px;
-            &__img{
+
+            &__img {
               width: 15px;
               height: 15px;
-              @media(max-width: 768px){
+              margin-top: 2px;
+
+              @media (max-width: 768px) {
                 width: 30px;
                 height: 30px;
               }
             }
           }
         }
-
       }
     }
   }
