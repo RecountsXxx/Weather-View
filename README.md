@@ -1,9 +1,7 @@
-Проект "WeatherApp" на Angular представляет собой веб-приложение для просмотра погоды и прогноза на 3 дня в разных городах. Приложение использует API OpenWeather для получения актуальной информации о погоде. Основной функционал приложения включает:
+The "WeatherApp" project on Angular is a web application for viewing the weather and forecast for 3 days in different cities. The app uses the OpenWeather API to get up-to-date weather information. The main functionality of the application includes:
 
-Поиск и выбор города: Пользователь может вводить название города в поле поиска, после чего приложение предложит варианты подходящих городов для выбора.
+City search and selection: The user can enter the name of the city in the search field, after which the application will offer options for suitable cities for selection.
 
-Просмотр текущей погоды: После выбора города, пользователь может увидеть текущую погоду, включая температуру, влажность, скорость ветра и другие параметры.
+Current Weather View: After selecting a city, the user can view the current weather, including temperature, humidity, wind speed and other parameters.
 
-Прогноз на 3 дня: Приложение отображает прогноз погоды на ближайшие 3 дня, позволяя пользователю планировать активности и подготовиться к изменениям погоды.
-
-Графическое представление данных: Погодные данные представлены в виде графиков, что позволяет визуально оценить изменения температуры и других параметров в течение дня.
+3 Day Forecast: The app displays the weather forecast for the next 3 days, allowing the user to plan activities and prepare for weather changes.
